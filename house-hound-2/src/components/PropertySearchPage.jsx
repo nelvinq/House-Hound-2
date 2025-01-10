@@ -1,5 +1,3 @@
-import Card from 'react-bootstrap/Card';
-import { Link } from "react-router-dom";
 import PropertySearchBar from './PropertySearchBar';
 import PropertySearchResult from './PropertySearchResult';
 

@@ -1,7 +1,7 @@
 import Card from "react-bootstrap/Card";
 import Button from "react-bootstrap/Button";
 import "./FavoriteProperties.css"
-import { Link } from "react-router-dom";
+import { Link } from "react-router";
 
 const FavoriteProperties = ({favorites, handleRemoveFavorite, handleDetails}) => {
     return (
@@ -12,13 +12,13 @@ const FavoriteProperties = ({favorites, handleRemoveFavorite, handleDetails}) =>
               {favorites.map((property) => (
                 <Card key={property.id} style={{ border: "2px solid black" }}>
                   <Card.Body>
-                    <Card.Title><strong>{property.project}</strong></Card.Title>
+                    <Card.Title><strong>{property.fields.project}</strong></Card.Title>
                     <Card.Subtitle className="mb-2 text-muted">
                     {property.street}
                     </Card.Subtitle>
                     <Card.Text>
-                      <strong>Market Segment:</strong> {property.marketSegment || "N/A"} <br></br>
-                      <strong>Past 5-year transactions:</strong> {property?.transaction?.length} 
+                      <strong>Market Segment:</strong> {property.fields.marketSegment || "N/A"} <br></br>
+                      <strong>Past 5-year transactions:</strong> {property?.transactions?.length} 
                     </Card.Text>
                     <Button
                       onClick={() => handleRemoveFavorite(property.id)}
@@ -32,7 +32,7 @@ const FavoriteProperties = ({favorites, handleRemoveFavorite, handleDetails}) =>
                       Unfavorite
                     </Button>{" "}
                     <Link to="/detail"
-                 onClick={() => handleDetails(property.project, property.street)}
+                 onClick={() => handleDetails(property.fields.project, property.fields.street)}
                 >More Details</Link>
                   </Card.Body>
                 </Card>

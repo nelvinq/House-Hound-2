@@ -1,56 +1,47 @@
 import { useState, useEffect } from "react";
-import { Route, Routes } from "react-router-dom";
+import { Route, Routes } from "react-router";
 import "./App.css";
 import * as propertyData from "./services/propertyData";
-import * as getToken from "./services/getToken";
 import NavBar from "./components/NavBar/NavBar";
 import Footer from "./components/Footer/Footer";
 import PropertySearchPage from "./components/PropertySearchPage";
 import PropertyDetails from "./components/PropertyDetails/PropertyDetails";
 import FavoriteProperties from "./components/FavouriteProperties/FavoriteProperties";
+import * as transactionData from "./services/transactionData";
 
 function App() {
   const [properties, setProperties] = useState([]);
-  const [token, setToken] = useState("");
   const [propertyDetails, setPropertyDetails] = useState([]);
   const [searchQuery, setSearchQuery] = useState("");
   const [filteredProperties, setFilteredProperties] = useState([]);
   const [favorites, setFavorites] = useState([]);
 
   useEffect(() => {
-    if (token === "") {
-      const fetchToken = async () => {
-        try {
-          const data = await getToken.getToken();
-          setToken(data);
-          console.log("Updated token:", token);
-        } catch (error) {
-          console.error("Error fetching data:", error);
-        }
-      };
-      fetchToken();
-    }
-  }, []);
-
-  useEffect(() => {
-    if (token !== "") {
       const fetchData = async () => {
         try {
-          const data = await propertyData.index();
-          setProperties(data);
-          setFilteredProperties(data);
+          const propertyResponse = await propertyData.propertyData();
+          const transactionResponse = await transactionData.transactionData();
+          const propertyAndTransaction = propertyResponse.map((property) => {
+            const transactions = transactionResponse.filter((txn) =>
+              property.fields["Transaction Table"]?.includes(txn.id)
+            ); return {
+              ...property,
+              transactions,
+            };
+          });
+          setProperties(propertyAndTransaction)
+          setFilteredProperties(propertyAndTransaction)
         } catch (error) {
           console.error("Error fetching data:", error);
         }
-      };
+      }
       fetchData();
-    }
-  }, [token]);
+    }, []);
 
   const handleDetails = async (project, street) => {
     try {
       const selectedDetails = properties.filter(
-        (property) => property.project === project && property.street === street
+        (property) => property.fields.project === project && property.fields.street === street
       );
       setPropertyDetails(selectedDetails);
     } catch (error) {
@@ -66,8 +57,8 @@ function App() {
       setFilteredProperties(
         properties.filter(
           (property) =>
-            property.project.toLowerCase().includes(query.toLowerCase()) ||
-            property.street.toLowerCase().includes(query.toLowerCase())
+            property.fields?.project?.toLowerCase().includes(query.toLowerCase()) ||
+            property.fields?.street?.toLowerCase().includes(query.toLowerCase())
         )
       );
     }
@@ -87,6 +78,15 @@ function App() {
   const isFavorite = (propertyId) =>
     favorites.some((fav) => fav.id === propertyId);
 
+  useEffect(() => {
+    console.log("Updated properties:", properties);
+  }, [properties]);
+
+  
+  useEffect(() => {
+    console.log("Updated filtered properties:", filteredProperties);
+  }, [filteredProperties]);
+
   return (
     <>
       <NavBar favorites={favorites}/>
@@ -97,7 +97,7 @@ function App() {
         <Route path="/" element={<PropertySearchPage filteredProperties={filteredProperties} handleDetails={handleDetails} searchQuery={searchQuery} handleSearch={handleSearch}/>} />
         <Route path='/detail' element={<PropertyDetails propertyDetails={propertyDetails} handleAddFavorite={handleAddFavorite}
         handleRemoveFavorite={handleRemoveFavorite}
-        isFavorite={isFavorite}/>}/>
+        isFavorite={isFavorite} />}/>
         <Route path='/favorites' element={<FavoriteProperties favorites={favorites}
         handleRemoveFavorite={handleRemoveFavorite} handleDetails={handleDetails}/>}/>
       </Routes>

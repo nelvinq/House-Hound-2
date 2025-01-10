@@ -1,4 +1,4 @@
-import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router";
 import "./PropertyDetails.css";
 
 const PropertyDetails = ({ propertyDetails,  handleAddFavorite,
@@ -58,19 +58,16 @@ const PropertyDetails = ({ propertyDetails,  handleAddFavorite,
       <h2>Property Details</h2>
       <div>
         <p>
-          <strong>Project:</strong> {property.project}
+          <strong>Project:</strong> {property.fields.project}
         </p>
         <p>
-          <strong>Street:</strong> {property.street}
+          <strong>Street:</strong> {property.fields.street}
         </p>
         <p>
-          <strong>Market Segment:</strong> {property.marketSegment || "N/A"}
-        </p>
-        <p>
-          <strong>Coordinates:</strong> {property.x}, {property.y}
+          <strong>Market Segment:</strong> {property.fields.marketSegment || "N/A"}
         </p>
         <h3>Transactions:</h3>
-        {property.transaction && property?.transaction?.length > 0 ? (
+        {property.transactions && property?.transactions?.length > 0 ? (
           <table className="transactionTable">
             <thead>
               <tr>
@@ -81,12 +78,12 @@ const PropertyDetails = ({ propertyDetails,  handleAddFavorite,
               </tr>
             </thead>
             <tbody>
-              {property.transaction.map((txn, index) => (
+              {property.transactions.map((txn, index) => (
                 <tr key={index}>
-                  <td>{formatContractDate(txn.contractDate)}</td>
-                  <td>{txn.area || "N/A"}</td>
-                  <td>{txn.price || "N/A"}</td>
-                  <td>{txn.propertyType || "N/A"}</td>
+                  <td>{formatContractDate(txn.fields.contractDate)}</td>
+                  <td>{txn.fields.area || "N/A"}</td>
+                  <td>{txn.fields.price || "N/A"}</td>
+                  <td>{txn.fields.propertyType || "N/A"}</td>
                 </tr>
               ))}
             </tbody>

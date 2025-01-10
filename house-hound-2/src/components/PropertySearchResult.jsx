@@ -1,5 +1,5 @@
 import Card from 'react-bootstrap/Card';
-import { Link } from "react-router-dom";
+import { Link } from "react-router";
 
 const PropertySearchResult = ({ filteredProperties, handleDetails}) => {
   return (
@@ -8,15 +8,15 @@ const PropertySearchResult = ({ filteredProperties, handleDetails}) => {
     <p><strong>Number of results: {filteredProperties?.length}</strong></p>
       {filteredProperties?.length > 0 ? (
         filteredProperties.map((property, index) => (
-          <div>
+          <div key={property.id}> 
             <Card style={{ width: "100%", padding:"10px", borderBottom: "1px solid #ccc"}}>
               <Card.Body>
-                <Card.Title style={{fontWeight:"bold"}}>{property.project}</Card.Title>
+                <Card.Title style={{fontWeight:"bold"}}>{property.fields.project}</Card.Title>
                 <Card.Subtitle className="mb-2 text-muted" style={{fontStyle: 'italic'}}>
-                 {property.street}
+                 {property.fields.street}
                 </Card.Subtitle>
                 <Link to="/detail"
-                 onClick={() => handleDetails(property.project, property.street)}
+                 onClick={() => handleDetails(property.fields.project, property.fields.street)}
                 >
                         More Details</Link>
               </Card.Body>
