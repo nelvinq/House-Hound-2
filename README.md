@@ -1,5 +1,5 @@
 # House-Hound
-![Model](https://github.com/nelvinq/House-Hound/blob/0a9185de2fee5f4555048624ac53bb4145aeb6d6/src/assets/images/House%20Hound%20Logo%20-%20white%20bg.png)
+![Model](https://github.com/nelvinq/House-Hound-2/blob/4438968d7f66ee34819ac2c9cb795760719abc74/src/assets/images/House%20Hound%20Logo%20-%20white%20bg.png)
 
 House Hound is a user-friendly web app designed to assist prospective homebuyers in Singapore. It simplifies the process of exploring private property projects, comparing options, and making informed decisions by providing essential property transaction details and allowing users to save their favorite properties for easy comparison.
 
