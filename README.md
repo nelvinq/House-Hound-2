@@ -14,7 +14,7 @@ Click the link: https://house-hound-8vwn0lk7u-nelvinqs-projects.vercel.app/
 1. React JS - For building the front end.
 2. React Bootstrap - For a sleek design with pre-built components.
 3. Git & GitHub - For version control and collaboration.
-4. API Integration - Airtable
+4. AirTable - For property and transaction data
 5. Planning & Design Tools - Figma Design Project for wireframing and prototyping the app interface. https://www.figma.com/design/fKBI7sJjzzcLDqaCcCB5oH/Coding-Projects?node-id=11-2
 
 # 🚧 Future Enhancements
