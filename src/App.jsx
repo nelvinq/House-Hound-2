@@ -78,15 +78,6 @@ function App() {
   const isFavorite = (propertyId) =>
     favorites.some((fav) => fav.id === propertyId);
 
-  useEffect(() => {
-    console.log("Updated properties:", properties);
-  }, [properties]);
-
-  
-  useEffect(() => {
-    console.log("Updated filtered properties:", filteredProperties);
-  }, [filteredProperties]);
-
   return (
     <>
       <NavBar favorites={favorites}/>
