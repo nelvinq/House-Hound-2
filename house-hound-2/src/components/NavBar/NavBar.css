@@ -1,0 +1,30 @@
+.navbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid #ddd;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: white;
+  }
+  
+  .navbar-logo .logo {
+    height: 40px;
+  }
+  
+  .navbar-menu {
+    list-style: none;
+    display: flex;
+    gap: 20px;
+    padding: 0px 30px;
+  }
+  
+  .menu-item a {
+    color: black;
+  }
+  
+  .menu-item a:hover {
+    color: blue;
+  }
