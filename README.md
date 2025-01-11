@@ -4,7 +4,7 @@
 House Hound is a user-friendly web app designed to assist prospective homebuyers in Singapore. It simplifies the process of exploring private property projects, comparing options, and making informed decisions by providing essential property transaction details and allowing users to save their favorite properties for easy comparison.
 
 # 🚀 Getting Started
-Click the link: https://house-hound-2-7lfxm1siy-nelvinqs-projects.vercel.app/
+Click the link: https://house-hound-2.vercel.app/
 
 # 📋 Instructions
 1. Use the search bar to explore private properties.
