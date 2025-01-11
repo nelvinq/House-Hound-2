@@ -29,8 +29,17 @@ function App() {
               transactions,
             };
           });
-          setProperties(propertyAndTransaction)
-          setFilteredProperties(propertyAndTransaction)
+          const sortedData = propertyAndTransaction.sort((a, b) => {
+            if (a.fields.project < b.fields.project) {
+              return -1;
+            }
+            if (a.fields.project > b.fields.project) {
+              return 1;
+            }
+            return 0;
+          });
+          setProperties(sortedData)
+          setFilteredProperties(sortedData)
         } catch (error) {
           console.error("Error fetching data:", error);
         }
